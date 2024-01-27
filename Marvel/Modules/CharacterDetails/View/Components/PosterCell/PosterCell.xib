@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PosterCell" customModule="Marvel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="110" height="183"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="110" height="183"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marvek" translatesAutoresizingMaskIntoConstraints="NO" id="MhI-dd-Q8i">
+                        <rect key="frame" x="0.0" y="0.0" width="111" height="150"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="150" id="9oq-mX-tw9"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFE-N3-pJl">
+                        <rect key="frame" x="8" y="154" width="94" height="14.333333333333343"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="MhI-dd-Q8i" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="PwP-P0-Ft5"/>
+                <constraint firstItem="MhI-dd-Q8i" firstAttribute="trailing" secondItem="ZTg-uK-7eu" secondAttribute="trailing" constant="1" id="b3N-kh-qUe"/>
+                <constraint firstItem="qFE-N3-pJl" firstAttribute="top" secondItem="MhI-dd-Q8i" secondAttribute="bottom" constant="4" id="bk4-fY-2Pe"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="qFE-N3-pJl" secondAttribute="trailing" constant="8" id="jf1-9d-1mW"/>
+                <constraint firstItem="MhI-dd-Q8i" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="o97-Sq-SzD"/>
+                <constraint firstItem="qFE-N3-pJl" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="8" id="tVo-lj-x0F"/>
+            </constraints>
+            <size key="customSize" width="110" height="183"/>
+            <connections>
+                <outlet property="posterImage" destination="MhI-dd-Q8i" id="AaW-uS-lF2"/>
+                <outlet property="posterName" destination="qFE-N3-pJl" id="xaV-WM-9Rq"/>
+            </connections>
+            <point key="canvasLocation" x="250" y="-49"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="marvek" width="604" height="902"/>
+    </resources>
+</document>

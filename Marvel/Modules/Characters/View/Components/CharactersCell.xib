@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="158" id="KGk-i7-Jjw" customClass="CharactersCell" customModule="Marvel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="483" height="158"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="483" height="158"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marvek" translatesAutoresizingMaskIntoConstraints="NO" id="ykX-mp-QBR">
+                        <rect key="frame" x="0.0" y="0.0" width="483" height="158"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EUH-dR-fcQ" customClass="ParallelogramView" customModule="Marvel" customModuleProvider="target">
+                        <rect key="frame" x="20" y="100" width="170" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3-D Man" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdV-Bq-FZO">
+                                <rect key="frame" x="4" y="2" width="162" height="36"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OdV-Bq-FZO" secondAttribute="trailing" constant="4" id="6QG-26-yuO"/>
+                            <constraint firstAttribute="bottom" secondItem="OdV-Bq-FZO" secondAttribute="bottom" constant="2" id="L7J-Oh-iye"/>
+                            <constraint firstAttribute="width" constant="170" id="Pn3-R3-JDl"/>
+                            <constraint firstItem="OdV-Bq-FZO" firstAttribute="leading" secondItem="EUH-dR-fcQ" secondAttribute="leading" constant="4" id="Vy3-6i-kpb"/>
+                            <constraint firstItem="OdV-Bq-FZO" firstAttribute="top" secondItem="EUH-dR-fcQ" secondAttribute="top" constant="2" id="qzp-E3-9jD"/>
+                            <constraint firstAttribute="height" constant="40" id="uCw-F0-2p7"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ykX-mp-QBR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Mal-Wi-2U5"/>
+                    <constraint firstAttribute="bottom" secondItem="ykX-mp-QBR" secondAttribute="bottom" id="Qvz-QG-D6l"/>
+                    <constraint firstAttribute="trailing" secondItem="ykX-mp-QBR" secondAttribute="trailing" id="Vgd-Sh-mhk"/>
+                    <constraint firstItem="EUH-dR-fcQ" firstAttribute="leading" secondItem="ykX-mp-QBR" secondAttribute="leading" constant="20" id="glz-ft-D0I"/>
+                    <constraint firstItem="EUH-dR-fcQ" firstAttribute="top" secondItem="ykX-mp-QBR" secondAttribute="top" constant="100" id="kjd-R9-OLc"/>
+                    <constraint firstItem="ykX-mp-QBR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qO1-q8-UX3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="characterImage" destination="ykX-mp-QBR" id="Hus-1c-K5E"/>
+                <outlet property="characterName" destination="OdV-Bq-FZO" id="O5Y-qN-Q3J"/>
+            </connections>
+            <point key="canvasLocation" x="89.312977099236633" y="30.985915492957748"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="marvek" width="604" height="902"/>
+    </resources>
+</document>
