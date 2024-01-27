@@ -7,7 +7,11 @@
 
 import Foundation
 
-class DetailsService {
+protocol DetailsServiceProtocol {
+    func fetchcharacters(path: String, offset: Int, limit: Int, search: String, completion: @escaping (Result<RootClass, APIError>) -> Void)
+}
+
+class DetailsService: DetailsServiceProtocol {
     private let networkManager = NetworkManager()
 
     func fetchcharacters(path: String, offset: Int, limit: Int,search: String, completion: @escaping (Result<RootClass, APIError>) -> Void) {

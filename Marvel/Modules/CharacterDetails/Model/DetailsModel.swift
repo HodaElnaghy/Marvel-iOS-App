@@ -11,5 +11,3 @@ struct PosterUIModel {
     let title: String
     let image: String
 }
-
-

@@ -8,9 +8,17 @@
 import Foundation
 import RxSwift
 
-class DetailsUseCase {
+protocol DetailsUseCaseProtocol {
+    func fetchCharacters(path: String, offset: Int, limit: Int) -> Observable<[PosterUIModel]>
+}
+
+class DetailsUseCase: DetailsUseCaseProtocol {
     private let disposeBag = DisposeBag()
-    let service = DetailsService()
+    let service: DetailsServiceProtocol
+
+    init(service: DetailsServiceProtocol) {
+        self.service = service
+    }
 
     func fetchCharacters(path: String, offset: Int, limit: Int) -> Observable<[PosterUIModel]> {
         return Observable.create { observer in

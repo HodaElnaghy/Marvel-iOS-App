@@ -8,9 +8,16 @@
 import UIKit
 import OSLog
 import RxSwift
+import DifferenceKit
+
 class DetailsViewController: UIViewController {
 
     // MARK: - @IBOutlets
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
+        didSet {
+            activityIndicator.hidesWhenStopped = true
+        }
+    }
     @IBOutlet weak var DetailsCollectionView: UICollectionView! {
         didSet {
             DetailsCollectionView.delegate = self
@@ -27,8 +34,7 @@ class DetailsViewController: UIViewController {
                 automaticallyAdjustsScrollViewInsets = false
             }
 
-            var backgroundImageView = UIImageView()
-            let backgroundImage = UIImage(named: "marvek")
+            let backgroundImageView = UIImageView()
             backgroundImageView.setImage(imagePath: viewModel.character.thumbnail.imagePath)
             backgroundImageView.applyBlurredDarkEffect()
 
@@ -93,42 +99,26 @@ class DetailsViewController: UIViewController {
     }
 
     private func observeChanges() {
-        viewModel.comicsData
-            .subscribe(onNext: { [weak self] comics in
-                self?.DetailsCollectionView.reloadData()
-            }, onError: { error in
-                print("Error fetching comics: \(error.localizedDescription)")
+        viewModel.isFetchingData
+            .asObservable()
+            .subscribe(onNext: { [weak self] isLoading in
+                if isLoading {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
             })
             .disposed(by: disposeBag)
 
-        viewModel.seriesData
-            .subscribe(onNext: { [weak self] series in
-                self?.DetailsCollectionView.reloadData()
-            }, onError: { error in
-                print("Error fetching series: \(error.localizedDescription)")
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.storiesData
-            .subscribe(onNext: { [weak self] stories in
-                self?.DetailsCollectionView.reloadData()
-            }, onError: { error in
-                print("Error fetching stories: \(error.localizedDescription)")
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.eventsData
-            .subscribe(onNext: { [weak self] events in
-                self?.DetailsCollectionView.reloadData()
-            }, onError: { error in
-                print("Error fetching events: \(error.localizedDescription)")
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.fetchComics()
-        viewModel.fetchEvents()
-        viewModel.fetchSeries()
-        viewModel.fetchStories()
+        viewModel.isDataRetrieved
+                    .subscribe(onNext: { [weak self] isDataRetrieved in
+                        if isDataRetrieved {
+                            self?.DetailsCollectionView.reloadData()
+                            // Do something when all data is retrieved
+                            print("All data retrieved")
+                        }
+                    })
+                    .disposed(by: disposeBag)
     }
 }
 
@@ -254,7 +244,10 @@ extension DetailsViewController: UICollectionViewDataSource {
             if let comicsData = comicsData, indexPath.row < comicsData.count {
                 cell.configureCell(imagePath: comicsData[indexPath.row].image, posterName: comicsData[indexPath.row].title)
             }
-
+            cell.alpha = 0.0
+                UIView.animate(withDuration: 0.2, delay: 0.1 * Double(indexPath.row)/4, options: .curveEaseInOut, animations: {
+                    cell.alpha = 1.0
+                }, completion: nil)
             return cell
 
         case 4:
@@ -267,7 +260,10 @@ extension DetailsViewController: UICollectionViewDataSource {
             if let seriesData = seriesData, indexPath.row < seriesData.count {
                 cell.configureCell(imagePath: seriesData[indexPath.row].image, posterName: seriesData[indexPath.row].title)
             }
-
+            cell.alpha = 0.0
+                UIView.animate(withDuration: 0.2, delay: 0.1 * Double(indexPath.row)/4, options: .curveEaseInOut, animations: {
+                    cell.alpha = 1.0
+                }, completion: nil)
             return cell
 
         case 5:
@@ -275,7 +271,10 @@ extension DetailsViewController: UICollectionViewDataSource {
                 os_log("Error dequeuing cell")
                 return UICollectionViewCell()
             }
-
+            cell.alpha = 0.0
+                UIView.animate(withDuration: 0.2, delay: 0.1 * Double(indexPath.row)/4, options: .curveEaseInOut, animations: {
+                    cell.alpha = 1.0
+                }, completion: nil)
             let storiesData = try? viewModel.storiesData.value()
 
             if let storiesData = storiesData, indexPath.row < storiesData.count {
@@ -288,12 +287,16 @@ extension DetailsViewController: UICollectionViewDataSource {
                 os_log("Error dequeuing cell")
                 return UICollectionViewCell()
             }
-
+            
             let eventsData = try? viewModel.eventsData.value()
 
             if let eventsData = eventsData, indexPath.row < eventsData.count {
                 cell.configureCell(imagePath: eventsData[indexPath.row].image, posterName: eventsData[indexPath.row].title)
             }
+            cell.alpha = 0.0
+                UIView.animate(withDuration: 0.2, delay: 0.1 * Double(indexPath.row)/4, options: .curveEaseInOut, animations: {
+                    cell.alpha = 1.0
+                }, completion: nil)
             return cell
 
         case 7:
@@ -311,6 +314,9 @@ extension DetailsViewController: UICollectionViewDataSource {
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if viewModel.optionArray.isEmpty {
+            return 7
+        }
         return 8
     }
 
@@ -383,7 +389,7 @@ extension DetailsViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 60, trailing: 0)
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(0))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -410,5 +416,4 @@ extension DetailsViewController {
         
         return section
     }
-
 }

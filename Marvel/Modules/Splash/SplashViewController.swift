@@ -9,21 +9,19 @@ import UIKit
 import Lottie
 
 class SplashViewController: UIViewController {
+    @IBOutlet weak var backgroundView: UIView!
     private var animationView: LottieAnimationView?
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let viewControllers = self.navigationController?.viewControllers {
-            print("Current View Controllers in Stack: \(viewControllers)")
 
-        }
         view.backgroundColor = .white
         animationView = .init(name: "marvel")
-        animationView!.frame = view.bounds
+        animationView!.frame = backgroundView.bounds
         animationView!.contentMode = .scaleAspectFit
         animationView!.loopMode = .loop
-        view.addSubview(animationView!)
+        backgroundView.addSubview(animationView!)
         animationView!.play()
-        Timer.scheduledTimer(timeInterval: 3 , target: self, selector: #selector(MainNav), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 2 , target: self, selector: #selector(MainNav), userInfo: nil, repeats: false)
     }
 
     @objc func MainNav() {

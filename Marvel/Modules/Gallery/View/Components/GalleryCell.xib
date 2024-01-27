@@ -10,10 +10,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="GalleryCell" customModule="Marvel" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="313" height="510"/>
+            <rect key="frame" x="0.0" y="0.0" width="313" height="557"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="313" height="510"/>
+                <rect key="frame" x="0.0" y="0.0" width="313" height="557"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marvek" translatesAutoresizingMaskIntoConstraints="NO" id="7CL-5e-2ro">
@@ -48,13 +48,13 @@
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="YSK-Rc-jCh" secondAttribute="trailing" constant="16" id="wuz-EN-ur1"/>
                 <constraint firstItem="9tE-l3-Vg7" firstAttribute="leading" secondItem="YSK-Rc-jCh" secondAttribute="leading" id="ykK-Ap-7Ae"/>
             </constraints>
-            <size key="customSize" width="313" height="510"/>
+            <size key="customSize" width="313" height="557"/>
             <connections>
                 <outlet property="indexLabel" destination="9tE-l3-Vg7" id="zO5-3r-lJn"/>
                 <outlet property="posterImage" destination="7CL-5e-2ro" id="kjI-Xz-wZS"/>
                 <outlet property="titleLabel" destination="YSK-Rc-jCh" id="1ff-8Q-gPe"/>
             </connections>
-            <point key="canvasLocation" x="115.26717557251908" y="108.45070422535211"/>
+            <point key="canvasLocation" x="115.26717557251908" y="125"/>
         </collectionViewCell>
     </objects>
     <resources>

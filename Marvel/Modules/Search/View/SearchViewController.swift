@@ -2,7 +2,13 @@ import UIKit
 import RxSwift
 import OSLog
 
-class SearchViewController: UIViewController, UISearchBarDelegate {
+class SearchViewController: UIViewController {
+    // MARK: - @IBOutlet
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
+        didSet {
+            activityIndicator.hidesWhenStopped = true
+        }
+    }
     @IBOutlet weak var searchTableView: UITableView! {
         didSet {
             searchTableView.delegate = self
@@ -10,43 +16,58 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             searchTableView.register(UINib(nibName: Constant.searchCell, bundle: nil), forCellReuseIdentifier: Constant.searchCell)
         }
     }
+
+    // MARK: - Properties
     private var isSearching: Bool = false
     private let searchBar = UISearchBar()
-    var viewModel = SearchViewModel(useCase: SearchUseCase(searchService: SearchService()))
+    var viewModel: SearchViewModel
     private let disposeBag = DisposeBag()
 
+    // MARK: - Constants
     private enum Constant {
         static let searchCell = "SearchCell"
     }
+
+    // MARK: - Initializer
+    init(viewModel: SearchViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - LifeCycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
-       observeChanges()
-
-
-    }
-
-
-
-    // MARK: - UISearchBarDelegate
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.fetchData(search: searchText)
+        observeChanges()
     }
 
     // MARK: - Private Functions
-
     private func observeChanges() {
         viewModel.charactersData
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] charactersData in
                 self?.searchTableView.reloadData()
             })
-        .disposed(by: disposeBag)  
+            .disposed(by: disposeBag)
+
+        viewModel.isFetchingData
+            .asObservable()
+            .subscribe(onNext: { [weak self] isLoading in
+                if isLoading {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
-
     private func setupNavigation() {
+        title = ""
         searchBar.placeholder = "Search..."
         searchBar.delegate = self
         navigationItem.titleView = searchBar
@@ -67,11 +88,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
 }
 
+// MARK: - UITableView Delegate
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         do {
             let charactersData = try viewModel.charactersData.value()
-            navigationController?.pushViewController(DetailsViewController(viewModel: DetailsViewModel(character: charactersData[indexPath.row])), animated: true)
+            navigationController?.pushViewController(DetailsViewController(viewModel: DetailsViewModel(character: charactersData[indexPath.row], useCase: DetailsUseCase(service: DetailsService()))), animated: true)
         } catch {
             print("Error getting charactersData: \(error)")
         }
@@ -79,6 +101,7 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableView DataSource
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -93,7 +116,7 @@ extension SearchViewController: UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = searchTableView.dequeueReusableCell(withIdentifier: Constant.searchCell, for: indexPath) as? SearchCell else {
             os_log("Error dequeuing cell")
@@ -112,3 +135,18 @@ extension SearchViewController: UITableViewDataSource {
 
 }
 
+// MARK: - UISearchBarDelegate
+extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchText.isEmpty {
+            viewModel.fetchData(search: searchText)
+        } else {
+            emptyTableView()
+        }
+    }
+
+    func emptyTableView() {
+        viewModel.charactersData.onNext([])
+        searchTableView.reloadData()
+    }
+}

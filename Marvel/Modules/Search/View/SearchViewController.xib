@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Marvel" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="0au-kg-X3z" id="sHc-Wz-1FB"/>
                 <outlet property="searchTableView" destination="Urd-7U-PyO" id="mDf-VC-Tqe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,12 +22,18 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Urd-7U-PyO">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                    <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                    <color key="backgroundColor" red="0.1607843041" green="0.1725490093" blue="0.18823529780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0au-kg-X3z">
+                    <rect key="frame" x="178" y="420" width="37" height="37"/>
+                    <color key="color" systemColor="systemRedColor"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="labelColor"/>
             <constraints>
+                <constraint firstItem="0au-kg-X3z" firstAttribute="centerY" secondItem="Urd-7U-PyO" secondAttribute="centerY" id="9eA-V1-SVo"/>
+                <constraint firstItem="0au-kg-X3z" firstAttribute="centerX" secondItem="Urd-7U-PyO" secondAttribute="centerX" id="KVf-mF-0RW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Urd-7U-PyO" secondAttribute="bottom" id="OsL-4W-pcg"/>
                 <constraint firstItem="Urd-7U-PyO" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Qj1-OO-h18"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Urd-7U-PyO" secondAttribute="trailing" id="Vcu-Ct-A3D"/>
@@ -39,8 +46,8 @@
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

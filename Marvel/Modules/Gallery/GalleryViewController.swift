@@ -51,9 +51,8 @@ class GalleryViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         let targetIndexPath = IndexPath(item: viewModel.index, section: 0)
-        UIView.animate(withDuration: 10, animations: {
-            self.galleryCollectionView.scrollToItem(at: targetIndexPath, at: .centeredHorizontally, animated: true)
-        })
+
+        scrollToTargetItem(at: targetIndexPath)
     }
 
     // MARK: - @IBAction
@@ -64,6 +63,26 @@ class GalleryViewController: UIViewController {
     // MARK: - Private Functions
     private func setupNavigation() {
         navigationItem.hidesBackButton = true
+    }
+    
+    private func scrollToTargetItem(at targetIndexPath: IndexPath) {
+        let itemsPerScroll = 1
+        let totalItems = galleryCollectionView.numberOfItems(inSection: targetIndexPath.section)
+
+        var startIndex = 0
+        while startIndex < totalItems {
+            let endIndex = min(startIndex + itemsPerScroll, totalItems)
+            let visibleItem = min(startIndex + itemsPerScroll, totalItems) - 1
+
+            let indexPath = IndexPath(item: visibleItem, section: targetIndexPath.section)
+
+            galleryCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+
+            if visibleItem >= targetIndexPath.item {
+                break
+            }
+            startIndex = endIndex
+        }
     }
 }
 
@@ -93,7 +112,16 @@ extension GalleryViewController {
     private func characterLayout()-> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(350), heightDimension: .absolute(600))
+
+        let screenHeight = UIScreen.main.bounds.height
+        let groupHeightPercentage: CGFloat = 1.3
+        let groupHeight = screenHeight * groupHeightPercentage
+
+        let screenwidth = UIScreen.main.bounds.width
+        let groupwidthPercentage: CGFloat = 0.8
+        let groupwidth = screenwidth * groupwidthPercentage
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(groupwidth), heightDimension: .absolute(groupHeight))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)

@@ -12,11 +12,10 @@ class PosterCell: UICollectionViewCell {
     @IBOutlet weak var posterName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func configureCell(imagePath: String, posterName: String) {
         self.posterName.text = posterName
-        posterImage.setImage(imagePath: imagePath.imagePath, placeholderImage: UIImage(named: "placeholder"))
+        posterImage.setImage(imagePath: imagePath.imagePath,placeholderImage: UIImage(named: "placeholder"))
     }
 }

@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsViewController" customModule="Marvel" customModuleProvider="target">
             <connections>
                 <outlet property="DetailsCollectionView" destination="5Kc-19-5bE" id="Czt-zd-Lkg"/>
+                <outlet property="activityIndicator" destination="3F5-YG-XMW" id="PoC-Ed-YuY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,13 +31,19 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="3F5-YG-XMW">
+                    <rect key="frame" x="186.66666666666666" y="752" width="20" height="20"/>
+                    <color key="color" systemColor="systemRedColor"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="5Kc-19-5bE" secondAttribute="bottom" id="Ic0-nm-Oaj"/>
+                <constraint firstItem="3F5-YG-XMW" firstAttribute="bottom" secondItem="5Kc-19-5bE" secondAttribute="bottom" constant="-80" id="KH0-XM-npz"/>
                 <constraint firstItem="5Kc-19-5bE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="QbQ-3e-P3f"/>
                 <constraint firstItem="5Kc-19-5bE" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="WA3-wS-2Mf"/>
+                <constraint firstItem="3F5-YG-XMW" firstAttribute="centerX" secondItem="5Kc-19-5bE" secondAttribute="centerX" id="pMl-Oo-kuI"/>
                 <constraint firstItem="5Kc-19-5bE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tzd-oj-sv4"/>
             </constraints>
             <point key="canvasLocation" x="101.5267175572519" y="19.718309859154932"/>
@@ -45,6 +52,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

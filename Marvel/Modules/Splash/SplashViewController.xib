@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="Marvel" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundView" destination="IEo-KC-pqt" id="Hfw-KG-xbx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,18 +20,28 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="YpK-88-4TR">
-                    <rect key="frame" x="42" y="558" width="308" height="90"/>
+                    <rect key="frame" x="42" y="486" width="308" height="90"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="90" id="gcF-YE-27b"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEo-KC-pqt">
+                    <rect key="frame" x="0.0" y="59" width="393" height="400"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="400" id="lDd-6v-NBC"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="YpK-88-4TR" secondAttribute="bottom" constant="170" id="ECL-t4-M6P"/>
+                <constraint firstItem="IEo-KC-pqt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5QQ-vd-Dle"/>
                 <constraint firstItem="YpK-88-4TR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="42" id="HLe-41-0dX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YpK-88-4TR" secondAttribute="trailing" constant="43" id="UDM-CO-G2m"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IEo-KC-pqt" secondAttribute="trailing" id="aZH-nZ-099"/>
+                <constraint firstItem="IEo-KC-pqt" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qrC-Xq-KXC"/>
+                <constraint firstItem="YpK-88-4TR" firstAttribute="top" secondItem="IEo-KC-pqt" secondAttribute="bottom" constant="27" id="yIA-Fp-UlR"/>
             </constraints>
             <point key="canvasLocation" x="-37.404580152671755" y="19.718309859154932"/>
         </view>

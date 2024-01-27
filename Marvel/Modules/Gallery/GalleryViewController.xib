@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Id6-ql-2y4">
-                    <rect key="frame" x="0.0" y="119" width="393" height="700"/>
+                    <rect key="frame" x="0.0" y="119" width="393" height="699"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yVh-OB-RxY">
@@ -52,13 +52,13 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="0.22745099660000001" green="0.2352941036" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" red="0.1607843041" green="0.1725490093" blue="0.18823529780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6we-02-sRw" secondAttribute="trailing" constant="27" id="0SA-Is-8nd"/>
                 <constraint firstItem="Id6-ql-2y4" firstAttribute="top" secondItem="6we-02-sRw" secondAttribute="bottom" constant="20" id="79V-3N-5Fc"/>
                 <constraint firstItem="6we-02-sRw" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="EPk-7N-0MU"/>
                 <constraint firstItem="Id6-ql-2y4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Uzy-d4-rBz"/>
-                <constraint firstItem="Id6-ql-2y4" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="1" id="pSq-F2-0vG"/>
+                <constraint firstItem="Id6-ql-2y4" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="pSq-F2-0vG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Id6-ql-2y4" secondAttribute="trailing" id="wNT-fi-Q7s"/>
             </constraints>
             <point key="canvasLocation" x="-37.404580152671755" y="19.718309859154932"/>
