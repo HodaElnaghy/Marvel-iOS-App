@@ -24,6 +24,7 @@
 		594DBEF92B648B8000803634 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594DBEF72B648B8000803634 /* SplashViewController.swift */; };
 		594DBEFA2B648B8000803634 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 594DBEF82B648B8000803634 /* SplashViewController.xib */; };
 		594DBEFC2B64916700803634 /* marvel.json in Resources */ = {isa = PBXBuildFile; fileRef = 594DBEFB2B64916600803634 /* marvel.json */; };
+		59550D742B65927B005A9538 /* NoInternetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59550D732B65927B005A9538 /* NoInternetView.swift */; };
 		596F37B32B63329600A7AE3A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F37B22B63329600A7AE3A /* NetworkError.swift */; };
 		596F37B52B6332C000A7AE3A /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F37B42B6332C000A7AE3A /* Methods.swift */; };
 		596F37B72B6332E400A7AE3A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F37B62B6332E400A7AE3A /* NetworkManager.swift */; };
@@ -56,6 +57,14 @@
 		5985077F2B647B9300A7C15E /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5985077D2B647B9300A7C15E /* GalleryCell.xib */; };
 		599787562B63E4AD0050FC27 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599787542B63E4AD0050FC27 /* SearchViewController.swift */; };
 		599787572B63E4AD0050FC27 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599787552B63E4AD0050FC27 /* SearchViewController.xib */; };
+		59B45F862B656328009E23C8 /* loading1.json in Resources */ = {isa = PBXBuildFile; fileRef = 59B45F852B656328009E23C8 /* loading1.json */; };
+		59B45F882B6563CE009E23C8 /* loading3.json in Resources */ = {isa = PBXBuildFile; fileRef = 59B45F872B6563CE009E23C8 /* loading3.json */; };
+		59B45F8A2B656453009E23C8 /* loading4.json in Resources */ = {isa = PBXBuildFile; fileRef = 59B45F892B656453009E23C8 /* loading4.json */; };
+		59B45F8D2B656E08009E23C8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B45F8C2B656E08009E23C8 /* Reachability.swift */; };
+		59B45F902B656E18009E23C8 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 59B45F8F2B656E18009E23C8 /* Reachability */; };
+		59B45F932B656E66009E23C8 /* SwiftMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B45F922B656E66009E23C8 /* SwiftMessages.swift */; };
+		59B45F962B656F11009E23C8 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 59B45F952B656F11009E23C8 /* SwiftMessages */; };
+		59B45F982B656F11009E23C8 /* SwiftMessages-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 59B45F972B656F11009E23C8 /* SwiftMessages-Dynamic */; };
 		59F59C942B63295B00DCDE19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F59C932B63295B00DCDE19 /* AppDelegate.swift */; };
 		59F59C962B63295B00DCDE19 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F59C952B63295B00DCDE19 /* SceneDelegate.swift */; };
 		59F59C982B63295B00DCDE19 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F59C972B63295B00DCDE19 /* ViewController.swift */; };
@@ -106,6 +115,7 @@
 		594DBEF72B648B8000803634 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		594DBEF82B648B8000803634 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		594DBEFB2B64916600803634 /* marvel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = marvel.json; sourceTree = "<group>"; };
+		59550D732B65927B005A9538 /* NoInternetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetView.swift; sourceTree = "<group>"; };
 		596F37B22B63329600A7AE3A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		596F37B42B6332C000A7AE3A /* Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
 		596F37B62B6332E400A7AE3A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -132,6 +142,11 @@
 		5985077D2B647B9300A7C15E /* GalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
 		599787542B63E4AD0050FC27 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		599787552B63E4AD0050FC27 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		59B45F852B656328009E23C8 /* loading1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading1.json; sourceTree = "<group>"; };
+		59B45F872B6563CE009E23C8 /* loading3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading3.json; sourceTree = "<group>"; };
+		59B45F892B656453009E23C8 /* loading4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading4.json; sourceTree = "<group>"; };
+		59B45F8C2B656E08009E23C8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		59B45F922B656E66009E23C8 /* SwiftMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessages.swift; sourceTree = "<group>"; };
 		59F59C902B63295B00DCDE19 /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F59C932B63295B00DCDE19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59F59C952B63295B00DCDE19 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,11 +172,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59B45F982B656F11009E23C8 /* SwiftMessages-Dynamic in Frameworks */,
 				596F38042B63C27100A7AE3A /* RxRelay in Frameworks */,
+				59B45F962B656F11009E23C8 /* SwiftMessages in Frameworks */,
 				594DBEF52B648B4400803634 /* Lottie in Frameworks */,
 				596F37FE2B63C27100A7AE3A /* RxBlocking-Dynamic in Frameworks */,
 				596F38022B63C27100A7AE3A /* RxCocoa-Dynamic in Frameworks */,
 				596F37C22B6333CC00A7AE3A /* Kingfisher in Frameworks */,
+				59B45F902B656E18009E23C8 /* Reachability in Frameworks */,
 				596F38002B63C27100A7AE3A /* RxCocoa in Frameworks */,
 				596F37FC2B63C27100A7AE3A /* RxBlocking in Frameworks */,
 			);
@@ -246,6 +264,9 @@
 			children = (
 				594DBEF72B648B8000803634 /* SplashViewController.swift */,
 				594DBEF82B648B8000803634 /* SplashViewController.xib */,
+				59B45F872B6563CE009E23C8 /* loading3.json */,
+				59B45F892B656453009E23C8 /* loading4.json */,
+				59B45F852B656328009E23C8 /* loading1.json */,
 				594DBEFB2B64916600803634 /* marvel.json */,
 			);
 			path = Splash;
@@ -467,6 +488,23 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		59B45F8B2B656DF2009E23C8 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				59B45F8C2B656E08009E23C8 /* Reachability.swift */,
+				59550D732B65927B005A9538 /* NoInternetView.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		59B45F912B656E57009E23C8 /* SwiftMessages */ = {
+			isa = PBXGroup;
+			children = (
+				59B45F922B656E66009E23C8 /* SwiftMessages.swift */,
+			);
+			path = SwiftMessages;
+			sourceTree = "<group>";
+		};
 		59F59C872B63295B00DCDE19 = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +528,8 @@
 		59F59C922B63295B00DCDE19 /* Marvel */ = {
 			isa = PBXGroup;
 			children = (
+				59B45F912B656E57009E23C8 /* SwiftMessages */,
+				59B45F8B2B656DF2009E23C8 /* Reachability */,
 				596F37CC2B63440100A7AE3A /* Modules */,
 				596F37B12B63322000A7AE3A /* Network */,
 				59F59CCE2B632A7A00DCDE19 /* Extentions */,
@@ -594,6 +634,9 @@
 				596F38012B63C27100A7AE3A /* RxCocoa-Dynamic */,
 				596F38032B63C27100A7AE3A /* RxRelay */,
 				594DBEF42B648B4400803634 /* Lottie */,
+				59B45F8F2B656E18009E23C8 /* Reachability */,
+				59B45F952B656F11009E23C8 /* SwiftMessages */,
+				59B45F972B656F11009E23C8 /* SwiftMessages-Dynamic */,
 			);
 			productName = Marvel;
 			productReference = 59F59C902B63295B00DCDE19 /* Marvel.app */;
@@ -671,6 +714,8 @@
 				596F37C02B6333CC00A7AE3A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				596F37E62B63C09C00A7AE3A /* XCRemoteSwiftPackageReference "RxSwift" */,
 				594DBEF32B648B4300803634 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				59B45F8E2B656E18009E23C8 /* XCRemoteSwiftPackageReference "Reachability" */,
+				59B45F942B656F11009E23C8 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = 59F59C912B63295B00DCDE19 /* Products */;
 			projectDirPath = "";
@@ -690,10 +735,12 @@
 			files = (
 				5985077F2B647B9300A7C15E /* GalleryCell.xib in Resources */,
 				59F59CC82B63299200DCDE19 /* CharactersViewController.xib in Resources */,
+				59B45F882B6563CE009E23C8 /* loading3.json in Resources */,
 				59F59CA02B63295C00DCDE19 /* LaunchScreen.storyboard in Resources */,
 				59F59CCD2B6329DC00DCDE19 /* CharactersCell.xib in Resources */,
 				59F59C9D2B63295C00DCDE19 /* Assets.xcassets in Resources */,
 				596F37DF2B63485000A7AE3A /* PosterCell.xib in Resources */,
+				59B45F862B656328009E23C8 /* loading1.json in Resources */,
 				59F59C9B2B63295B00DCDE19 /* Main.storyboard in Resources */,
 				596F37DB2B6347F500A7AE3A /* LabelCell.xib in Resources */,
 				5901806E2B64424B00010455 /* CharacterCell.xib in Resources */,
@@ -704,6 +751,7 @@
 				5901805E2B641FC100010455 /* SearchCell.xib in Resources */,
 				594DBEFA2B648B8000803634 /* SplashViewController.xib in Resources */,
 				594DBEF22B647E2800803634 /* GalleryViewController.xib in Resources */,
+				59B45F8A2B656453009E23C8 /* loading4.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +778,7 @@
 			files = (
 				590180692B64376100010455 /* String + https.swift in Sources */,
 				5985077E2B647B9300A7C15E /* GalleryCell.swift in Sources */,
+				59B45F8D2B656E08009E23C8 /* Reachability.swift in Sources */,
 				5901806D2B64424B00010455 /* CharacterCell.swift in Sources */,
 				590180672B6422A500010455 /* SearchService.swift in Sources */,
 				594DBEF92B648B8000803634 /* SplashViewController.swift in Sources */,
@@ -737,6 +786,7 @@
 				596F37B72B6332E400A7AE3A /* NetworkManager.swift in Sources */,
 				5901805D2B641FC100010455 /* SearchCell.swift in Sources */,
 				59F59CC72B63299200DCDE19 /* CharactersViewController.swift in Sources */,
+				59B45F932B656E66009E23C8 /* SwiftMessages.swift in Sources */,
 				596F37DE2B63485000A7AE3A /* PosterCell.swift in Sources */,
 				596F37BC2B63339300A7AE3A /* String + EncodeURL.swift in Sources */,
 				596F37B92B63331600A7AE3A /* EndPoint.swift in Sources */,
@@ -750,6 +800,7 @@
 				596F37CB2B6337B300A7AE3A /* CharacterUseCase.swift in Sources */,
 				596F37C82B63359C00A7AE3A /* CharacterService.swift in Sources */,
 				599787562B63E4AD0050FC27 /* SearchViewController.swift in Sources */,
+				59550D742B65927B005A9538 /* NoInternetView.swift in Sources */,
 				596F37E52B63BDEF00A7AE3A /* UIImage + Blur.swift in Sources */,
 				596F37D12B63443800A7AE3A /* DetailsViewController.swift in Sources */,
 				590180642B64229400010455 /* SearchUseCase.swift in Sources */,
@@ -1133,6 +1184,22 @@
 				minimumVersion = 6.6.0;
 			};
 		};
+		59B45F8E2B656E18009E23C8 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		59B45F942B656F11009E23C8 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.9;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1165,6 +1232,21 @@
 		596F38032B63C27100A7AE3A /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RxRelay;
+		};
+		59B45F8F2B656E18009E23C8 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59B45F8E2B656E18009E23C8 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+		59B45F952B656F11009E23C8 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59B45F942B656F11009E23C8 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
+		59B45F972B656F11009E23C8 /* SwiftMessages-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59B45F942B656F11009E23C8 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = "SwiftMessages-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

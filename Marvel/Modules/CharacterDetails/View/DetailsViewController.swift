@@ -8,7 +8,6 @@
 import UIKit
 import OSLog
 import RxSwift
-import DifferenceKit
 
 class DetailsViewController: UIViewController {
 

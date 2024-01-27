@@ -21,10 +21,9 @@ class CharactersViewModel {
 
     init(useCase: CharacterUseCase) {
         self.useCase = useCase
-        fetchData()
     }
 
-    private func fetchData() {
+    func fetchData() {
         isFetchingData.accept(true)
         isFetchingMoreData = true
         useCase.fetchCharacters(path: "", offset: offset, limit: limit)
@@ -43,9 +42,6 @@ class CharactersViewModel {
             if limit <= 100 {
                 fetchData()
             }
-        }
-        else {
-            print("no")
         }
     }
 }
