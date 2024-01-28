@@ -18,10 +18,19 @@ Marvel Characters is an iOS application that allows users to explore information
 ## UI
 
 ### Characters list
-<div style="display: inline-block;">
-  <img src="home.png" alt="home" width="200" />
-</div>
+<div style="display: flex; justify-content: space-between;">
 
+  <div style="flex: 1; text-align: center;">
+    <p><strong>Characters List</strong></p>
+    <img src="home.png" alt="home" width="200" />
+  </div>
+
+  <div style="flex: 1; text-align: center;">
+    <p><strong>Pagination Loading</strong></p>
+    <img src="pagination.png" alt="pagination" width="200" />
+  </div>
+
+</div>
 
 ## Implementation Highlights
 
