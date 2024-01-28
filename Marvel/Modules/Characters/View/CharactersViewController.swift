@@ -69,6 +69,7 @@ extension CharactersViewController: UITableViewDataSource {
         if let charactersData = charactersData, indexPath.row < charactersData.count {
             cell.setupCell(name: charactersData[indexPath.row].name, image: charactersData[indexPath.row].thumbnail)
         }
+        
         return cell
     }
 
@@ -128,7 +129,9 @@ extension CharactersViewController {
     private func setupBindings() {
         
         ConnectionManager.shared.isInternetConnected
-            .subscribe(onNext: { isConnected in
+            .subscribe(onNext: { [ weak self ] isConnected in
+                guard let self = self else { return }
+
                 if isConnected {
                     self.viewModel.fetchData()
                 } else {
@@ -138,15 +141,15 @@ extension CharactersViewController {
             })
             .disposed(by: disposeBag)
 
-
-
         viewModel.isFetchingData
             .asObservable()
             .subscribe(onNext: { [weak self] isLoading in
+                guard let self = self else { return }
+
                 if isLoading {
-                    self?.activityIndicator.startAnimating()
+                    self.activityIndicator.startAnimating()
                 } else {
-                    self?.activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating()
                 }
             })
             .disposed(by: disposeBag)
@@ -154,8 +157,10 @@ extension CharactersViewController {
         viewModel.charactersData
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] charactersData in
-                self?.charactersTableView.reloadData()
-                self?.viewModel.isFetchingMoreData = false
+                guard let self = self else { return }
+
+                self.charactersTableView.reloadData()
+                self.viewModel.isFetchingMoreData = false
             })
         .disposed(by: disposeBag)
     }

@@ -28,8 +28,10 @@ class CharactersViewModel {
         isFetchingMoreData = true
         useCase.fetchCharacters(path: "", offset: offset, limit: limit)
             .subscribe(onNext: { [weak self] data in
-                self?.charactersData.onNext(data)
-                self?.isFetchingData.accept(false)
+                guard let self = self else { return }
+
+                self.charactersData.onNext(data)
+                self.isFetchingData.accept(false)
             }, onError: { error in
                 print("Error fetching characters: \(error.localizedDescription)")
             })
