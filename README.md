@@ -17,15 +17,22 @@ Marvel Characters is an iOS application that allows users to explore information
 
 ## UI
 
+### Main pages 
 <div style="display: inline-block;">
-  <p Characters list/>
+    <img src="splash.png" alt="No Internet" width="200" />
   <img src="home.png" alt="No Internet" width="200" />
- <p Character Details/>
   <img src="details.png" alt="No Internet" width="200" />
-  <p Image gallery/>
   <img src="gallery.png" alt="Dark Mode" width="200" />
+  <img src="search.png" alt="Dark Mode" width="200" />
+
 </div>
 
+### Responsivity
+<div style="display: inline-block;">
+  <img src="home.png" alt="No Internet" width="200" />
+  <img src="details.png" alt="No Internet" width="200" />
+  <img src="gallery.png" alt="Dark Mode" width="200" />
+</div>
 
 
 
