@@ -15,7 +15,7 @@ class SearchViewModel {
     var isFetchingData = BehaviorRelay<Bool>(value: false)
     private let disposeBag = DisposeBag()
     private let useCase: SearchUseCase
-    private(set) var charactersData: BehaviorSubject<[CharacterUIModel]> = BehaviorSubject(value: [])
+    private(set) var charactersData: PublishSubject<[CharacterUIModel]> = .init()
     init(useCase: SearchUseCase) {
         self.useCase = useCase
     }
@@ -23,8 +23,10 @@ class SearchViewModel {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "", offset: offset, limit: 100, search: search)
             .subscribe(onNext: { [weak self] data in
-                self?.charactersData.onNext(data)
-                self?.isFetchingData.accept(false)
+                guard let self = self else { return }
+
+                self.charactersData.onNext(data)
+                self.isFetchingData.accept(false)
             }, onError: { error in
                 print("Error fetching characters: \(error.localizedDescription)")
             })

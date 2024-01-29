@@ -97,27 +97,38 @@ class DetailsViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
     }
 
+    private func animateCells(cell: UICollectionViewCell, index: Int) {
+        cell.alpha = 0.0
+        UIView.animate(withDuration: 0.2, delay: 0.1 * Double(index)/4, options: .curveEaseInOut, animations: {
+            cell.alpha = 1.0
+        }, completion: nil)
+    }
+
     private func observeChanges() {
         viewModel.isFetchingData
             .asObservable()
             .subscribe(onNext: { [weak self] isLoading in
+                guard let self = self else { return }
+
                 if isLoading {
-                    self?.activityIndicator.startAnimating()
+                    self.activityIndicator.startAnimating()
                 } else {
-                    self?.activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating()
                 }
             })
             .disposed(by: disposeBag)
 
         viewModel.isDataRetrieved
-                    .subscribe(onNext: { [weak self] isDataRetrieved in
-                        if isDataRetrieved {
-                            self?.DetailsCollectionView.reloadData()
-                            // Do something when all data is retrieved
-                            print("All data retrieved")
-                        }
-                    })
-                    .disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] isDataRetrieved in
+                guard let self = self else { return }
+
+                if isDataRetrieved {
+                    self.DetailsCollectionView.reloadData()
+                    // Do something when all data is retrieved
+                    print("All data retrieved")
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -127,37 +138,14 @@ extension DetailsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 3:
-            do {
-                let comics = try viewModel.comicsData.value()
-                navigationController?.pushViewController(GalleryViewController(viewModel: GalleryViewModel(posterArray: comics, index: indexPath.row)), animated: true)
-            } catch {
-                print("Error getting charactersData: \(error)")
-            }
+            navigationController?.pushViewController(GalleryViewController(viewModel: GalleryViewModel(posterArray: viewModel.comicsDataArray, index: indexPath.row)), animated: true)
 
         case 4:
-            do {
-                let series = try viewModel.seriesData.value()
-                navigationController?.pushViewController(GalleryViewController(viewModel: GalleryViewModel(posterArray: series, index: indexPath.row)), animated: true)
-            } catch {
-                print("Error getting charactersData: \(error)")
-            }
-
+            navigationController?.pushViewController(GalleryViewController(viewModel: GalleryViewModel(posterArray: viewModel.seriesDataArray, index: indexPath.row)), animated: true)
         case 5:
-            do {
-                let stories = try viewModel.storiesData.value()
-                navigationController?.pushViewController(GalleryViewController(viewModel: GalleryViewModel(posterArray: stories, index: indexPath.row)), animated: true)
-            } catch {
-                print("Error getting charactersData: \(error)")
-            }
-
+            navigationController?.pushViewController(GalleryViewController(viewModel: GalleryViewModel(posterArray: viewModel.storiesDataArray, index: indexPath.row)), animated: true)
         case 6:
-            do {
-                let events = try viewModel.eventsData.value()
-                navigationController?.pushViewController(GalleryViewController(viewModel: GalleryViewModel(posterArray: events, index: indexPath.row)), animated: true)
-            } catch {
-                print("Error getting charactersData: \(error)")
-            }
-
+            navigationController?.pushViewController(GalleryViewController(viewModel: GalleryViewModel(posterArray: viewModel.eventsDataArray, index: indexPath.row)), animated: true)
         default:
             return
         }
@@ -175,33 +163,13 @@ extension DetailsViewController: UICollectionViewDataSource {
         case 7:
             return viewModel.optionArray.count
         case 3:
-            do {
-                let comics = try viewModel.comicsData.value()
-                return comics.count
-            } catch {
-                return 0
-            }
+            return viewModel.comicsDataArray.count
         case 4:
-            do {
-                let series = try viewModel.seriesData.value()
-                return series.count
-            } catch {
-                return 0
-            }
+            return viewModel.seriesDataArray.count
         case 5:
-            do {
-                let stories = try viewModel.storiesData.value()
-                return stories.count
-            } catch {
-                return 0
-            }
+            return viewModel.storiesDataArray.count
         case 6:
-            do {
-                let events = try viewModel.eventsData.value()
-                return events.count
-            } catch {
-                return 0
-            }
+            return viewModel.eventsDataArray.count
         default:
             return 10
         }
@@ -238,47 +206,27 @@ extension DetailsViewController: UICollectionViewDataSource {
                 os_log("Error dequeuing cell")
                 return UICollectionViewCell()
             }
-            let comicsData = try? viewModel.comicsData.value()
+            cell.configureCell(imagePath: viewModel.comicsDataArray[indexPath.row].image, posterName: viewModel.comicsDataArray[indexPath.row].title)
 
-            if let comicsData = comicsData, indexPath.row < comicsData.count {
-                cell.configureCell(imagePath: comicsData[indexPath.row].image, posterName: comicsData[indexPath.row].title)
-            }
-            cell.alpha = 0.0
-                UIView.animate(withDuration: 0.2, delay: 0.1 * Double(indexPath.row)/4, options: .curveEaseInOut, animations: {
-                    cell.alpha = 1.0
-                }, completion: nil)
+            animateCells(cell: cell, index: indexPath.row)
             return cell
-
         case 4:
             guard let cell = DetailsCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.posterCell, for: indexPath) as? PosterCell else {
                 os_log("Error dequeuing cell")
                 return UICollectionViewCell()
             }
-            let seriesData = try? viewModel.seriesData.value()
 
-            if let seriesData = seriesData, indexPath.row < seriesData.count {
-                cell.configureCell(imagePath: seriesData[indexPath.row].image, posterName: seriesData[indexPath.row].title)
-            }
-            cell.alpha = 0.0
-                UIView.animate(withDuration: 0.2, delay: 0.1 * Double(indexPath.row)/4, options: .curveEaseInOut, animations: {
-                    cell.alpha = 1.0
-                }, completion: nil)
+            cell.configureCell(imagePath: viewModel.seriesDataArray[indexPath.row].image, posterName: viewModel.seriesDataArray[indexPath.row].title)
+            animateCells(cell: cell, index: indexPath.row)
             return cell
-
         case 5:
             guard let cell = DetailsCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.posterCell, for: indexPath) as? PosterCell else {
                 os_log("Error dequeuing cell")
                 return UICollectionViewCell()
             }
-            cell.alpha = 0.0
-                UIView.animate(withDuration: 0.2, delay: 0.1 * Double(indexPath.row)/4, options: .curveEaseInOut, animations: {
-                    cell.alpha = 1.0
-                }, completion: nil)
-            let storiesData = try? viewModel.storiesData.value()
+            animateCells(cell: cell, index: indexPath.row)
 
-            if let storiesData = storiesData, indexPath.row < storiesData.count {
-                cell.configureCell(imagePath: storiesData[indexPath.row].image, posterName: storiesData[indexPath.row].title)
-            }
+            cell.configureCell(imagePath: viewModel.storiesDataArray[indexPath.row].image, posterName: viewModel.storiesDataArray[indexPath.row].title)
             return cell
 
         case 6:
@@ -286,16 +234,10 @@ extension DetailsViewController: UICollectionViewDataSource {
                 os_log("Error dequeuing cell")
                 return UICollectionViewCell()
             }
-            
-            let eventsData = try? viewModel.eventsData.value()
 
-            if let eventsData = eventsData, indexPath.row < eventsData.count {
-                cell.configureCell(imagePath: eventsData[indexPath.row].image, posterName: eventsData[indexPath.row].title)
-            }
-            cell.alpha = 0.0
-                UIView.animate(withDuration: 0.2, delay: 0.1 * Double(indexPath.row)/4, options: .curveEaseInOut, animations: {
-                    cell.alpha = 1.0
-                }, completion: nil)
+            cell.configureCell(imagePath: viewModel.eventsDataArray[indexPath.row].image, posterName: viewModel.eventsDataArray[indexPath.row].title)
+
+            animateCells(cell: cell, index: indexPath.row)
             return cell
 
         case 7:
@@ -309,7 +251,6 @@ extension DetailsViewController: UICollectionViewDataSource {
         default:
             return UICollectionViewCell()
         }
-
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -329,7 +270,6 @@ extension DetailsViewController: UICollectionViewDataSource {
         }
         return UICollectionReusableView()
     }
-
 }
 
 // MARK: - CollectionView Layout
@@ -412,7 +352,7 @@ extension DetailsViewController {
             layoutSize: headerSize,
             elementKind: Constants.sectionHeaderElementKind, alignment: .top)
         section.boundarySupplementaryItems = [sectionHeader]
-        
+
         return section
     }
 }

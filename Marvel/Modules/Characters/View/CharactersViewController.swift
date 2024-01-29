@@ -9,6 +9,7 @@ import UIKit
 import OSLog
 import RxSwift
 import SwiftMessages
+import RxCocoa
 
 class CharactersViewController: UIViewController {
 
@@ -22,8 +23,7 @@ class CharactersViewController: UIViewController {
     }
     @IBOutlet weak var charactersTableView: UITableView! {
         didSet {
-            charactersTableView.delegate = self
-            charactersTableView.dataSource = self
+            charactersTableView.rx.setDelegate(self).disposed(by: disposeBag)
             let nib = UINib(nibName: Constant.characterCell, bundle: nil)
             charactersTableView.register(nib, forCellReuseIdentifier: Constant.characterCell)
         }
@@ -48,30 +48,7 @@ class CharactersViewController: UIViewController {
 }
 
 // MARK: - UITable View data source
-extension CharactersViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        do {
-            let charactersData = try viewModel.charactersData.value()
-            return charactersData.count
-        } catch {
-            print("Error getting charactersData: \(error)")
-            return 0
-        }
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = charactersTableView.dequeueReusableCell(withIdentifier: Constant.characterCell, for: indexPath) as? CharactersCell else {
-            os_log("Error dequeuing cell")
-            return UITableViewCell()
-        }
-        let charactersData = try? viewModel.charactersData.value()
-
-        if let charactersData = charactersData, indexPath.row < charactersData.count {
-            cell.setupCell(name: charactersData[indexPath.row].name, image: charactersData[indexPath.row].thumbnail)
-        }
-        
-        return cell
-    }
+extension CharactersViewController {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 170
@@ -84,14 +61,15 @@ extension CharactersViewController: UITableViewDataSource {
 
 // MARK: - UITableView Delegate
 extension CharactersViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        do {
-            let charactersData = try viewModel.charactersData.value()
-            navigationController?.pushViewController(DetailsViewController(viewModel: DetailsViewModel(character: charactersData[indexPath.row], useCase: DetailsUseCase(service: DetailsService()))), animated: true)
-        } catch {
-            print("Error getting charactersData: \(error)")
-        }
-    }
+
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        do {
+//            let charactersData = try viewModel.charactersData.value()
+//            navigationController?.pushViewController(DetailsViewController(viewModel: DetailsViewModel(character: charactersData[indexPath.row], useCase: DetailsUseCase(service: DetailsService()))), animated: true)
+//        } catch {
+//            print("Error getting charactersData: \(error)")
+//        }
+//    }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         viewModel.fetchMoreData()
@@ -109,6 +87,7 @@ extension CharactersViewController {
     @objc func searchButtonTapped() {
         navigationController?.pushViewController(SearchViewController(viewModel: SearchViewModel(useCase: SearchUseCase(searchService: SearchService()))), animated: true)
     }
+
     private func addTitle() {
         title = " "
         let logoImageView = UIImageView(image: UIImage(named: "logo"))
@@ -128,6 +107,17 @@ extension CharactersViewController {
 
     private func setupBindings() {
         
+        charactersTableView.rx.modelSelected(CharacterUIModel.self).subscribe(onNext: { [weak self] item in
+            guard let self = self else { return }
+            
+            self.navigationController?.pushViewController(DetailsViewController(viewModel: DetailsViewModel(character: item, useCase: DetailsUseCase(service: DetailsService()))), animated: true)        }).disposed(by: disposeBag)
+
+        charactersTableView.rx.didEndDecelerating
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.fetchMoreData()
+            })
+            .disposed(by: disposeBag)
+
         ConnectionManager.shared.isInternetConnected
             .subscribe(onNext: { [ weak self ] isConnected in
                 guard let self = self else { return }
@@ -147,22 +137,20 @@ extension CharactersViewController {
                 guard let self = self else { return }
 
                 if isLoading {
+                    viewModel.isFetchingMoreData = true
                     self.activityIndicator.startAnimating()
                 } else {
+                    viewModel.isFetchingMoreData = false
                     self.activityIndicator.stopAnimating()
                 }
             })
             .disposed(by: disposeBag)
 
-        viewModel.charactersData
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] charactersData in
-                guard let self = self else { return }
+        viewModel.charactersData.bind(to: charactersTableView.rx.items(cellIdentifier: Constant.characterCell, cellType: CharactersCell.self)) { [weak self] index, post, cell in
+            guard let self = self else { return }
 
-                self.charactersTableView.reloadData()
-                self.viewModel.isFetchingMoreData = false
-            })
-        .disposed(by: disposeBag)
+            cell.setupCell(name: post.name, image: post.thumbnail)
+        } .disposed(by: disposeBag)
     }
 }
 

@@ -57,9 +57,7 @@
 		5985077F2B647B9300A7C15E /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5985077D2B647B9300A7C15E /* GalleryCell.xib */; };
 		599787562B63E4AD0050FC27 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599787542B63E4AD0050FC27 /* SearchViewController.swift */; };
 		599787572B63E4AD0050FC27 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599787552B63E4AD0050FC27 /* SearchViewController.xib */; };
-		59B45F862B656328009E23C8 /* loading1.json in Resources */ = {isa = PBXBuildFile; fileRef = 59B45F852B656328009E23C8 /* loading1.json */; };
 		59B45F882B6563CE009E23C8 /* loading3.json in Resources */ = {isa = PBXBuildFile; fileRef = 59B45F872B6563CE009E23C8 /* loading3.json */; };
-		59B45F8A2B656453009E23C8 /* loading4.json in Resources */ = {isa = PBXBuildFile; fileRef = 59B45F892B656453009E23C8 /* loading4.json */; };
 		59B45F8D2B656E08009E23C8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B45F8C2B656E08009E23C8 /* Reachability.swift */; };
 		59B45F902B656E18009E23C8 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 59B45F8F2B656E18009E23C8 /* Reachability */; };
 		59B45F932B656E66009E23C8 /* SwiftMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B45F922B656E66009E23C8 /* SwiftMessages.swift */; };
@@ -142,9 +140,7 @@
 		5985077D2B647B9300A7C15E /* GalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
 		599787542B63E4AD0050FC27 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		599787552B63E4AD0050FC27 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
-		59B45F852B656328009E23C8 /* loading1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading1.json; sourceTree = "<group>"; };
 		59B45F872B6563CE009E23C8 /* loading3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading3.json; sourceTree = "<group>"; };
-		59B45F892B656453009E23C8 /* loading4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading4.json; sourceTree = "<group>"; };
 		59B45F8C2B656E08009E23C8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		59B45F922B656E66009E23C8 /* SwiftMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessages.swift; sourceTree = "<group>"; };
 		59F59C902B63295B00DCDE19 /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,8 +261,6 @@
 				594DBEF72B648B8000803634 /* SplashViewController.swift */,
 				594DBEF82B648B8000803634 /* SplashViewController.xib */,
 				59B45F872B6563CE009E23C8 /* loading3.json */,
-				59B45F892B656453009E23C8 /* loading4.json */,
-				59B45F852B656328009E23C8 /* loading1.json */,
 				594DBEFB2B64916600803634 /* marvel.json */,
 			);
 			path = Splash;
@@ -740,7 +734,6 @@
 				59F59CCD2B6329DC00DCDE19 /* CharactersCell.xib in Resources */,
 				59F59C9D2B63295C00DCDE19 /* Assets.xcassets in Resources */,
 				596F37DF2B63485000A7AE3A /* PosterCell.xib in Resources */,
-				59B45F862B656328009E23C8 /* loading1.json in Resources */,
 				59F59C9B2B63295B00DCDE19 /* Main.storyboard in Resources */,
 				596F37DB2B6347F500A7AE3A /* LabelCell.xib in Resources */,
 				5901806E2B64424B00010455 /* CharacterCell.xib in Resources */,
@@ -751,7 +744,6 @@
 				5901805E2B641FC100010455 /* SearchCell.xib in Resources */,
 				594DBEFA2B648B8000803634 /* SplashViewController.xib in Resources */,
 				594DBEF22B647E2800803634 /* GalleryViewController.xib in Resources */,
-				59B45F8A2B656453009E23C8 /* loading4.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

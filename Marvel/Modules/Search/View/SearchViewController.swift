@@ -11,8 +11,7 @@ class SearchViewController: UIViewController {
     }
     @IBOutlet weak var searchTableView: UITableView! {
         didSet {
-            searchTableView.delegate = self
-            searchTableView.dataSource = self
+            searchTableView.rx.setDelegate(self).disposed(by: disposeBag)
             searchTableView.register(UINib(nibName: Constant.searchCell, bundle: nil), forCellReuseIdentifier: Constant.searchCell)
         }
     }
@@ -50,20 +49,36 @@ class SearchViewController: UIViewController {
         viewModel.charactersData
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] charactersData in
-                self?.searchTableView.reloadData()
+                guard let self = self else { return }
+
+                self.searchTableView.reloadData()
             })
             .disposed(by: disposeBag)
 
         viewModel.isFetchingData
             .asObservable()
             .subscribe(onNext: { [weak self] isLoading in
+                guard let self = self else { return }
+
                 if isLoading {
-                    self?.activityIndicator.startAnimating()
+                    self.activityIndicator.startAnimating()
                 } else {
-                    self?.activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating()
                 }
             })
             .disposed(by: disposeBag)
+
+        searchTableView.rx.modelSelected(CharacterUIModel.self).subscribe(onNext: { [weak self] item in
+            guard let self = self else { return }
+
+            self.navigationController?.pushViewController(DetailsViewController(viewModel: DetailsViewModel(character: item, useCase: DetailsUseCase(service: DetailsService()))), animated: true)        }).disposed(by: disposeBag)
+
+        viewModel.charactersData.bind(to: searchTableView.rx.items(cellIdentifier: Constant.searchCell, cellType: SearchCell.self)) { [weak self] index, post, cell in
+            guard let self = self else { return }
+
+            cell.configureCell(imagePath: post.thumbnail, name: post.name)
+        } .disposed(by: disposeBag)
+
     }
 
     private func setupNavigation() {
@@ -90,45 +105,13 @@ class SearchViewController: UIViewController {
 
 // MARK: - UITableView Delegate
 extension SearchViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        do {
-            let charactersData = try viewModel.charactersData.value()
-            navigationController?.pushViewController(DetailsViewController(viewModel: DetailsViewModel(character: charactersData[indexPath.row], useCase: DetailsUseCase(service: DetailsService()))), animated: true)
-        } catch {
-            print("Error getting charactersData: \(error)")
-        }
 
-    }
 }
 
 // MARK: - UITableView DataSource
-extension SearchViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SearchViewController {
 
-        if ((searchBar.text?.isEmpty ?? true)) {
-            return 0
-        }
-        do {
-            let charactersData = try viewModel.charactersData.value()
-            return charactersData.count
-        } catch {
-            print("Error getting charactersData: \(error)")
-            return 0
-        }
-    }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = searchTableView.dequeueReusableCell(withIdentifier: Constant.searchCell, for: indexPath) as? SearchCell else {
-            os_log("Error dequeuing cell")
-            return UITableViewCell()
-        }
-        let charactersData = try? viewModel.charactersData.value()
-
-        if let charactersData = charactersData, indexPath.row < charactersData.count {
-            cell.configureCell(imagePath: charactersData[indexPath.row].thumbnail, name: charactersData[indexPath.row].name)
-        }
-        return cell
-    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }

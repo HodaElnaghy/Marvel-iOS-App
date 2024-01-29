@@ -16,10 +16,11 @@ class DetailsViewModel {
     var optionArray: [String] = []
     let character: CharacterUIModel
     private let disposeBag = DisposeBag()
-    private(set) var comicsData: BehaviorSubject<[PosterUIModel]> = BehaviorSubject(value: [])
-    private(set) var seriesData: BehaviorSubject<[PosterUIModel]> = BehaviorSubject(value: [])
-    private(set) var storiesData: BehaviorSubject<[PosterUIModel]> = BehaviorSubject(value: [])
-    private(set) var eventsData: BehaviorSubject<[PosterUIModel]> = BehaviorSubject(value: [])
+    var comicsDataArray: [PosterUIModel] = []
+    var seriesDataArray: [PosterUIModel] = []
+    var eventsDataArray: [PosterUIModel] = []
+    var storiesDataArray: [PosterUIModel] = []
+
     var comcsRetrieved = false
     var storiesRetrieved = false
     var seriesRetrieved = false
@@ -33,16 +34,17 @@ class DetailsViewModel {
         fetchEvents()
         fetchSeries()
         fetchStories()
-
     }
 
     func fetchComics() {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "/\(character.id)/comics", offset: 0, limit: 100)
             .subscribe(onNext: { [weak self] data in
-                self?.comicsData.onNext(data)
-                self?.comcsRetrieved = true
-                self?.checkAllDataRetrieved()
+                guard let self = self else { return }
+
+                self.comicsDataArray.append(contentsOf: data)
+                self.comcsRetrieved = true
+                self.checkAllDataRetrieved()
             }, onError: { error in
                 print("Error fetching characters: \(error.localizedDescription)")
             })
@@ -53,9 +55,11 @@ class DetailsViewModel {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "/\(character.id)/series", offset: 0, limit: 100)
             .subscribe(onNext: { [weak self] data in
-                self?.seriesData.onNext(data)
-                self?.seriesRetrieved = true
-                self?.checkAllDataRetrieved()
+                guard let self = self else { return }
+
+                self.seriesDataArray.append(contentsOf: data)
+                self.seriesRetrieved = true
+                self.checkAllDataRetrieved()
             }, onError: { error in
                 print("Error fetching characters: \(error.localizedDescription)")
             })
@@ -66,9 +70,11 @@ class DetailsViewModel {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "/\(character.id)/stories", offset: 0, limit: 100)
             .subscribe(onNext: { [weak self] data in
-                self?.storiesData.onNext(data)
-                self?.storiesRetrieved = true
-                self?.checkAllDataRetrieved()
+                guard let self = self else { return }
+
+                self.storiesDataArray.append(contentsOf: data)
+                self.storiesRetrieved = true
+                self.checkAllDataRetrieved()
             }, onError: { error in
                 print("Error fetching characters: \(error.localizedDescription)")
             })
@@ -79,9 +85,11 @@ class DetailsViewModel {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "/\(character.id)/events", offset: 0, limit: 100)
             .subscribe(onNext: { [weak self] data in
-                self?.eventsData.onNext(data)
-                self?.eventsRetrieved = true
-                self?.checkAllDataRetrieved()
+                guard let self = self else { return }
+
+                self.eventsDataArray.append(contentsOf: data)
+                self.eventsRetrieved = true
+                self.checkAllDataRetrieved()
             }, onError: { error in
                 print("Error fetching characters: \(error.localizedDescription)")
             })

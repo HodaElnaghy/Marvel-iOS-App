@@ -17,7 +17,7 @@ class CharactersViewModel {
     var isFetchingMoreData = false
     private let disposeBag = DisposeBag()
     private let useCase: CharacterUseCase
-    private(set) var charactersData: BehaviorSubject<[CharacterUIModel]> = BehaviorSubject(value: [])
+    private(set) var charactersData: PublishSubject<[CharacterUIModel]> = .init()
 
     init(useCase: CharacterUseCase) {
         self.useCase = useCase
@@ -29,9 +29,8 @@ class CharactersViewModel {
         useCase.fetchCharacters(path: "", offset: offset, limit: limit)
             .subscribe(onNext: { [weak self] data in
                 guard let self = self else { return }
-
-                self.charactersData.onNext(data)
                 self.isFetchingData.accept(false)
+                self.charactersData.onNext(data)
             }, onError: { error in
                 print("Error fetching characters: \(error.localizedDescription)")
             })
