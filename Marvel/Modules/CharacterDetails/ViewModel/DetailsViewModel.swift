@@ -30,13 +30,16 @@ class DetailsViewModel {
         self.character = character
         self.useCase = useCase
         checkAllDataRetrieved()
+    }
+
+    func fetchData() {
         fetchComics()
         fetchEvents()
         fetchSeries()
         fetchStories()
     }
 
-    func fetchComics() {
+    private func fetchComics() {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "/\(character.id)/comics", offset: 0, limit: 100)
             .subscribe(onNext: { [weak self] data in
@@ -51,7 +54,7 @@ class DetailsViewModel {
             .disposed(by: disposeBag)
     }
 
-    func fetchSeries() {
+    private func fetchSeries() {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "/\(character.id)/series", offset: 0, limit: 100)
             .subscribe(onNext: { [weak self] data in
@@ -66,7 +69,7 @@ class DetailsViewModel {
             .disposed(by: disposeBag)
     }
 
-    func fetchStories() {
+    private func fetchStories() {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "/\(character.id)/stories", offset: 0, limit: 100)
             .subscribe(onNext: { [weak self] data in
@@ -81,7 +84,7 @@ class DetailsViewModel {
             .disposed(by: disposeBag)
     }
 
-    func fetchEvents() {
+    private func fetchEvents() {
         isFetchingData.accept(true)
         useCase.fetchCharacters(path: "/\(character.id)/events", offset: 0, limit: 100)
             .subscribe(onNext: { [weak self] data in

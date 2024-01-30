@@ -79,6 +79,17 @@ class SearchViewController: UIViewController {
             cell.configureCell(imagePath: post.thumbnail, name: post.name)
         } .disposed(by: disposeBag)
 
+        ConnectionManager.shared.isInternetConnected
+            .subscribe(onNext: { [ weak self ] isConnected in
+                guard let self = self else { return }
+
+                if isConnected {
+                    self.viewModel.fetchData(search: searchBar.text ?? "")
+                } else {
+                    SwiftMessagesClass.showSwiftMessage(theme: .error, title: "No internet connection", body: "")
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
     private func setupNavigation() {

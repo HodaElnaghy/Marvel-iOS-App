@@ -124,8 +124,19 @@ class DetailsViewController: UIViewController {
 
                 if isDataRetrieved {
                     self.DetailsCollectionView.reloadData()
-                    // Do something when all data is retrieved
-                    print("All data retrieved")
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        ConnectionManager.shared.isInternetConnected
+            .subscribe(onNext: { [ weak self ] isConnected in
+                guard let self = self else { return }
+
+                if isConnected {
+                    self.viewModel.fetchData()
+                } else {
+                    SwiftMessagesClass.showSwiftMessage(theme: .error, title: "No internet connection", body: "")
+                    self.activityIndicator.stopAnimating()
                 }
             })
             .disposed(by: disposeBag)

@@ -125,8 +125,8 @@ extension CharactersViewController {
                 if isConnected {
                     self.viewModel.fetchData()
                 } else {
-                    self.blockingView.show(message: "No internet connection")
                     SwiftMessagesClass.showSwiftMessage(theme: .error, title: "No internet connection", body: "")
+                    self.activityIndicator.stopAnimating()
                 }
             })
             .disposed(by: disposeBag)
